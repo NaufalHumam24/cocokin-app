@@ -3,7 +3,3 @@ flask_cors
 pandas
 scikit-learn
 catboost
-
-git add requirements.txt
-git commit -m "fix: add catboost to requirements"
-git push
