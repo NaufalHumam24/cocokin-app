@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cocok.in - Bantu Pilih Jurusan Kuliah</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="navbar">
+    <div class="container">
+      <div class="logo">Cocok.in</div>
+      <nav class="nav-menu">
+        <ul>
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="tes_minat.html">Tes Minat & Bakat</a></li>
+          <li><a href="profil_jurusan.html">Profil Jurusan</a></li>
+          <li><a href="forum_konsultasi.html">Forum Konsultasi</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Quiz Section -->
+  <section class="quiz-section">
+    <div class="quiz-box">
+      <h2 class="quiz-title">Tes Minat & Bakat</h2>
+
+      <div class="progress-container">
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 55%;"></div>
+        </div>
+        <p class="progress-text">Progress Pengerjaan 11/20</p>
+      </div>
+
+      <h3 class="question">
+        Topik yang membuatmu ingin tahu lebih banyak:
+      </h3>
+
+      <div class="options">
+        <label class="option">
+          <input type="radio" name="answer" />
+          <span class="option-text">Kecerdasan buatan, bioteknologi</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="answer" />
+          <span class="option-text">Politik, budaya, sejarah</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="answer" />
+          <span class="option-text">Investasi, startup</span>
+        </label>
+        <label class="option">
+          <input type="radio" name="answer" />
+          <span class="option-text">Desain produk, sinematografi</span>
+        </label>
+      </div>
+
+      <div class = "button-nav">
+        <a href="tes_progress_10.html" class="back-button">Back</a>
+        <a href="tes_progress_12.html" class="next-button">Next</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-column">
+        <h4>Cocok.in</h4>
+        <p>
+          Cocok.in adalah platform bantu siswa SMA menemukan jurusan kuliah yang paling sesuai dengan minat, bakat, dan masa depan mereka.
+        </p>
+      </div>
+
+      <div class="footer-column fitur">
+        <h4>Fitur</h4>
+        <ul>
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="tes_minat.html">Tes Minat & Bakat</a></li>
+          <li><a href="profil_jurusan.html">Profil Jurusan</a></li>
+          <li><a href="forum_konsultasi.html">Forum Konsultasi</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column informasi">
+        <h4>Informasi</h4>
+        <ul>
+          <li><a href="#">Tentang Kami</a></li>
+          <li><a href="#">Kebijakan Privasi</a></li>
+          <li><a href="#">Syarat & Ketentuan</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Ikuti Kami</h4>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom-bar">
+      <p>© 2025 <span class="highlight">Cocok.in</span>. All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <script>
+    // Menentukan nomor soal saat ini
+    const questionIndex = 10;
+
+    // Tangkap tombol Next
+    const nextButton = document.querySelector('.next-button');
+    nextButton.addEventListener('click', function (e) {
+      // Cek apakah ada jawaban yang dipilih
+      const selected = document.querySelector('input[name="answer"]:checked');
+      if (!selected) {
+        e.preventDefault(); // Stop lanjut ke halaman berikutnya
+        alert('Silakan pilih salah satu jawaban terlebih dahulu!');
+        return;
+      }
+
+      // Ambil nilai index jawaban terpilih (A–D)
+      const options = document.querySelectorAll('input[name="answer"]');
+      let selectedIndex = -1;
+      options.forEach((opt, idx) => {
+        if (opt.checked) selectedIndex = idx;
+      });
+
+      // Konversi index ke huruf: 0 → A, 1 → B, 2 → C, 3 → D
+      const huruf = ['A', 'B', 'C', 'D'][selectedIndex];
+
+      // Simpan ke localStorage
+      const jawaban = JSON.parse(localStorage.getItem('jawabanTes')) || [];
+      jawaban[questionIndex] = huruf;
+      localStorage.setItem('jawabanTes', JSON.stringify(jawaban));
+    });
+
+    // Optional: untuk debugging lihat jawaban sementara
+    console.log("Jawaban saat ini:", JSON.parse(localStorage.getItem('jawabanTes')));
+  </script>
+
+</body>
+</html>

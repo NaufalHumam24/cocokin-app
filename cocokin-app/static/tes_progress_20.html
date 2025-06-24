@@ -1,0 +1,150 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cocok.in - Bantu Pilih Jurusan Kuliah</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="navbar">
+    <div class="container">
+      <div class="logo">Cocok.in</div>
+      <nav class="nav-menu">
+        <ul>
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="tes_minat.html">Tes Minat & Bakat</a></li>
+          <li><a href="profil_jurusan.html">Profil Jurusan</a></li>
+          <li><a href="forum_konsultasi.html">Forum Konsultasi</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Quiz Section -->
+  <section class="quiz-section">
+    <div class="quiz-box">
+      <h2 class="quiz-title">Tes Minat & Bakat</h2>
+
+      <form id="quizForm">
+        <div class="progress-container">
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 100%;"></div>
+          </div>
+          <p class="progress-text">Progress Pengerjaan 20/20</p>
+        </div>
+
+        <h3 class="question">
+          Hal yang membuatmu merasa berprestasi adalah:
+        </h3>
+
+        <div class="options">
+          <label class="option">
+            <input type="radio" name="answer" />
+            <span class="option-text">Menyelesaikan proyek teknis dengan tepat</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="answer" />
+            <span class="option-text">Mempengaruhi orang lain lewat ide atau tulisan</span>
+          </label>
+          <label class="option">
+            <input type="radio" name="answer" />
+            <span class="option-text">Melihat strategi bisnis berjalan sukses</span>
+          </label>
+          <label class="option">
+          <input type="radio" name="answer" />
+          <span class="option-text">Menyelesaikan karya yang dihargai orang lain</span>
+        </label>
+        </div>
+
+        <div class="button-nav">
+          <a href="tes_progress_19.html" class="back-button">Back</a>
+          <button type="submit" class="next-button">Finish</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-column">
+        <h4>Cocok.in</h4>
+        <p>
+          Cocok.in adalah platform bantu siswa SMA menemukan jurusan kuliah yang paling sesuai dengan minat, bakat, dan masa depan mereka.
+        </p>
+      </div>
+
+      <div class="footer-column fitur">
+        <h4>Fitur</h4>
+        <ul>
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="tes_minat.html">Tes Minat & Bakat</a></li>
+          <li><a href="profil_jurusan.html">Profil Jurusan</a></li>
+          <li><a href="forum_konsultasi.html">Forum Konsultasi</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column informasi">
+        <h4>Informasi</h4>
+        <ul>
+          <li><a href="#">Tentang Kami</a></li>
+          <li><a href="#">Kebijakan Privasi</a></li>
+          <li><a href="#">Syarat & Ketentuan</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Ikuti Kami</h4>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom-bar">
+      <p>© 2025 <span class="highlight">Cocok.in</span>. All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('quizForm').addEventListener('submit', function (e) {
+      e.preventDefault(); // Hindari reload halaman default
+
+      // Validasi pilihan
+      const selected = document.querySelector('input[name="answer"]:checked');
+      if (!selected) {
+        alert('Silakan pilih salah satu jawaban terlebih dahulu!');
+        return;
+      }
+
+      // Ambil index pilihan
+      const options = document.querySelectorAll('input[name="answer"]');
+      let selectedIndex = -1;
+      options.forEach((opt, idx) => {
+        if (opt.checked) selectedIndex = idx;
+      });
+
+      // Simpan ke localStorage
+      const huruf = ['A', 'B', 'C', 'D'][selectedIndex];
+      const questionIndex = 19;
+      const jawaban = JSON.parse(localStorage.getItem('jawabanTes')) || [];
+      jawaban[questionIndex] = huruf;
+      localStorage.setItem('jawabanTes', JSON.stringify(jawaban));
+
+      // Redirect ke halaman hasil
+      window.location.href = "rekomendasi_jurusan.html";
+    });
+
+    // Opsional: Debug jawaban tersimpan
+    console.log("Jawaban saat ini:", JSON.parse(localStorage.getItem('jawabanTes')));
+  </script>
+
+</body>
+</html>
